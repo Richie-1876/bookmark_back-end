@@ -1,0 +1,175 @@
+  [1m[35m (208.9ms)[0m  [1m[35mCREATE DATABASE "bookmark_api_development" ENCODING = 'unicode'[0m
+  [1m[35m (124.8ms)[0m  [1m[35mCREATE DATABASE "bookmark_api_test" ENCODING = 'unicode'[0m
+  [1m[35m (16.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3461398021710492150)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateBookmarks (20200403144105)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (7.2ms)[0m  [1m[35mCREATE TABLE "bookmarks" ("id" bigserial primary key, "name" character varying, "logo" character varying, "description" character varying, "link" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200403144105"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-04-03 14:42:00.471726"], ["updated_at", "2020-04-03 14:42:00.471726"]]
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(3461398021710492150)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBookmark Create (1.0ms)[0m  [1m[32mINSERT INTO "bookmarks" ("name", "logo", "description", "link", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "React"], ["logo", "N/A"], ["description", "frontend framework"], ["link", "N/A"], ["created_at", "2020-04-03 14:51:26.859690"], ["updated_at", "2020-04-03 14:51:26.859690"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mBookmark Load (0.3ms)[0m  [1m[34mSELECT "bookmarks".* FROM "bookmarks" WHERE "bookmarks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Started GET "/bookmarks" for ::1 at 2020-04-03 15:52:14 +0100
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by BookmarksController#index as HTML
+  [1m[36mBookmark Load (0.8ms)[0m  [1m[34mSELECT "bookmarks".* FROM "bookmarks"[0m
+  ↳ app/controllers/bookmarks_controller.rb:8:in `index'
+Completed 200 OK in 14ms (Views: 7.2ms | ActiveRecord: 4.2ms | Allocations: 6009)
+
+
+Started POST "/bookmarks?bookmark[name]=node.js&bookmark[logo]=n/a&bookmark[description]=ORM&bookmark[link]=N/A" for ::1 at 2020-04-03 15:56:02 +0100
+Processing by BookmarksController#create as */*
+  Parameters: {"icecream"=>{"name"=>"Strawberry Surprise", "description"=>"Not strawberry (You don't want to know)"}, "bookmark"=>{"name"=>"node.js", "logo"=>"n/a", "description"=>"ORM", "link"=>"N/A"}}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/bookmarks_controller.rb:20:in `create'
+  [1m[36mBookmark Create (1.1ms)[0m  [1m[32mINSERT INTO "bookmarks" ("name", "logo", "description", "link", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "node.js"], ["logo", "n/a"], ["description", "ORM"], ["link", "N/A"], ["created_at", "2020-04-03 14:56:02.345917"], ["updated_at", "2020-04-03 14:56:02.345917"]]
+  ↳ app/controllers/bookmarks_controller.rb:20:in `create'
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/bookmarks_controller.rb:20:in `create'
+Completed 201 Created in 7ms (Views: 0.6ms | ActiveRecord: 1.7ms | Allocations: 2676)
+
+
+Started PUT "/bookmarks?bookmark[name]=node.js&bookmark[logo]=n/a&bookmark[description]=dom&bookmark[link]=N/A" for ::1 at 2020-04-03 15:56:23 +0100
+  
+ActionController::RoutingError (No route matches [PUT] "/bookmarks"):
+  
+actionpack (6.0.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.2.2) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.2.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.2.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+railties (6.0.2.2) lib/rails/engine.rb:526:in `call'
+puma (4.3.3) lib/puma/configuration.rb:228:in `call'
+puma (4.3.3) lib/puma/server.rb:682:in `handle_request'
+puma (4.3.3) lib/puma/server.rb:472:in `process_client'
+puma (4.3.3) lib/puma/server.rb:328:in `block in run'
+puma (4.3.3) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started PUT "/bookmarks/2?bookmark[name]=mode.js&bookamrk[logo]=N/A&bookmark[description]=ORM&bookmark[link]=N/A" for ::1 at 2020-04-03 15:57:55 +0100
+Processing by BookmarksController#update as */*
+  Parameters: {"icecream"=>{"name"=>"Strawberry Surprise", "description"=>"Not strawberry (You don't want to know)"}, "bookmark"=>{"name"=>"mode.js", "description"=>"ORM", "link"=>"N/A"}, "bookamrk"=>{"logo"=>"N/A"}, "id"=>"2"}
+  [1m[36mBookmark Load (1.1ms)[0m  [1m[34mSELECT "bookmarks".* FROM "bookmarks" WHERE "bookmarks"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/bookmarks_controller.rb:44:in `set_bookmark'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/bookmarks_controller.rb:29:in `update'
+  [1m[36mBookmark Update (0.4ms)[0m  [1m[33mUPDATE "bookmarks" SET "name" = $1, "updated_at" = $2 WHERE "bookmarks"."id" = $3[0m  [["name", "mode.js"], ["updated_at", "2020-04-03 14:57:55.875332"], ["id", 2]]
+  ↳ app/controllers/bookmarks_controller.rb:29:in `update'
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/bookmarks_controller.rb:29:in `update'
+Completed 200 OK in 43ms (Views: 0.5ms | ActiveRecord: 2.4ms | Allocations: 4521)
+
+
+Started DELETE "/bookmarks/2?bookmark[name]=mode.js&bookamrk[logo]=N/A&bookmark[description]=ORM&bookmark[link]=N/A" for ::1 at 2020-04-03 15:58:12 +0100
+Processing by BookmarksController#destroy as */*
+  Parameters: {"icecream"=>{"name"=>"Strawberry Surprise", "description"=>"Not strawberry (You don't want to know)"}, "bookmark"=>{"name"=>"mode.js", "description"=>"ORM", "link"=>"N/A"}, "bookamrk"=>{"logo"=>"N/A"}, "id"=>"2"}
+  [1m[36mBookmark Load (0.4ms)[0m  [1m[34mSELECT "bookmarks".* FROM "bookmarks" WHERE "bookmarks"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/bookmarks_controller.rb:44:in `set_bookmark'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/bookmarks_controller.rb:38:in `destroy'
+  [1m[36mBookmark Destroy (0.9ms)[0m  [1m[31mDELETE FROM "bookmarks" WHERE "bookmarks"."id" = $1[0m  [["id", 2]]
+  ↳ app/controllers/bookmarks_controller.rb:38:in `destroy'
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/bookmarks_controller.rb:38:in `destroy'
+Completed 204 No Content in 7ms (ActiveRecord: 1.9ms | Allocations: 2258)
+
+
+Started DELETE "/bookmarks/2" for ::1 at 2020-04-03 15:58:26 +0100
+Processing by BookmarksController#destroy as */*
+  Parameters: {"icecream"=>{"name"=>"Strawberry Surprise", "description"=>"Not strawberry (You don't want to know)"}, "id"=>"2"}
+  [1m[36mBookmark Load (0.3ms)[0m  [1m[34mSELECT "bookmarks".* FROM "bookmarks" WHERE "bookmarks"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/bookmarks_controller.rb:44:in `set_bookmark'
+Completed 404 Not Found in 2ms (ActiveRecord: 0.3ms | Allocations: 624)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Bookmark with 'id'=2):
+  
+app/controllers/bookmarks_controller.rb:44:in `set_bookmark'
+Started DELETE "/bookmarks/2" for ::1 at 2020-04-03 15:59:18 +0100
+Processing by BookmarksController#destroy as */*
+  Parameters: {"icecream"=>{"name"=>"Strawberry Surprise", "description"=>"Not strawberry (You don't want to know)"}, "id"=>"2"}
+  [1m[36mBookmark Load (0.3ms)[0m  [1m[34mSELECT "bookmarks".* FROM "bookmarks" WHERE "bookmarks"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/bookmarks_controller.rb:44:in `set_bookmark'
+Completed 404 Not Found in 2ms (ActiveRecord: 0.3ms | Allocations: 620)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Bookmark with 'id'=2):
+  
+app/controllers/bookmarks_controller.rb:44:in `set_bookmark'
+Started DELETE "/bookmarks/1" for ::1 at 2020-04-03 15:59:30 +0100
+Processing by BookmarksController#destroy as */*
+  Parameters: {"icecream"=>{"name"=>"Strawberry Surprise", "description"=>"Not strawberry (You don't want to know)"}, "id"=>"1"}
+  [1m[36mBookmark Load (0.4ms)[0m  [1m[34mSELECT "bookmarks".* FROM "bookmarks" WHERE "bookmarks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/bookmarks_controller.rb:44:in `set_bookmark'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/bookmarks_controller.rb:38:in `destroy'
+  [1m[36mBookmark Destroy (0.3ms)[0m  [1m[31mDELETE FROM "bookmarks" WHERE "bookmarks"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/bookmarks_controller.rb:38:in `destroy'
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/bookmarks_controller.rb:38:in `destroy'
+Completed 204 No Content in 6ms (ActiveRecord: 1.2ms | Allocations: 2207)
+
+
+Started GET "/bookmarks" for ::1 at 2020-04-03 16:00:50 +0100
+Processing by BookmarksController#index as */*
+  Parameters: {"text/plain"=>["", ""]}
+  [1m[36mBookmark Load (0.8ms)[0m  [1m[34mSELECT "bookmarks".* FROM "bookmarks"[0m
+  ↳ app/controllers/bookmarks_controller.rb:8:in `index'
+Completed 200 OK in 5ms (Views: 3.4ms | ActiveRecord: 0.8ms | Allocations: 786)
+
+
+  [1m[36mBookmark Load (1.3ms)[0m  [1m[34mSELECT "bookmarks".* FROM "bookmarks" WHERE "bookmarks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Started GET "/bookmarks" for ::1 at 2020-04-03 16:09:05 +0100
+Processing by BookmarksController#index as HTML
+  [1m[36mBookmark Load (0.7ms)[0m  [1m[34mSELECT "bookmarks".* FROM "bookmarks"[0m
+  ↳ app/controllers/bookmarks_controller.rb:8:in `index'
+Completed 200 OK in 11ms (Views: 4.6ms | ActiveRecord: 0.7ms | Allocations: 846)
+
+
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBookmark Create (0.7ms)[0m  [1m[32mINSERT INTO "bookmarks" ("name", "logo", "description", "link", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "React"], ["logo", "https://reactjs.org/logo-og.png"], ["description", "React is a library for building composable user interfaces. It encourages the creation of reusable UI components, which present data that changes over time. ... React can also render on the server using Node, and it can power native apps using React Native."], ["link", "https://reactjs.org/docs/getting-started.html"], ["created_at", "2020-04-03 15:21:45.797061"], ["updated_at", "2020-04-03 15:21:45.797061"]]
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBookmark Create (0.3ms)[0m  [1m[32mINSERT INTO "bookmarks" ("name", "logo", "description", "link", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "JavaScript"], ["logo", "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png"], ["description", "JavaScript is a dynamic computer programming language. It is lightweight and most commonly used as a part of web pages, whose implementations allow client-side script to interact with the user and make dynamic pages. It is an interpreted programming language with object-oriented capabilities."], ["link", "https://developer.mozilla.org/en-US/docs/Web/JavaScript"], ["created_at", "2020-04-03 15:21:45.801808"], ["updated_at", "2020-04-03 15:21:45.801808"]]
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBookmark Create (0.4ms)[0m  [1m[32mINSERT INTO "bookmarks" ("name", "logo", "description", "link", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "React"], ["logo", "https://reactjs.org/logo-og.png"], ["description", "React is a library for building composable user interfaces. It encourages the creation of reusable UI components, which present data that changes over time. ... React can also render on the server using Node, and it can power native apps using React Native."], ["link", "https://reactjs.org/docs/getting-started.html"], ["created_at", "2020-04-03 15:22:25.753180"], ["updated_at", "2020-04-03 15:22:25.753180"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBookmark Create (0.2ms)[0m  [1m[32mINSERT INTO "bookmarks" ("name", "logo", "description", "link", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "JavaScript"], ["logo", "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png"], ["description", "JavaScript is a dynamic computer programming language. It is lightweight and most commonly used as a part of web pages, whose implementations allow client-side script to interact with the user and make dynamic pages. It is an interpreted programming language with object-oriented capabilities."], ["link", "https://developer.mozilla.org/en-US/docs/Web/JavaScript"], ["created_at", "2020-04-03 15:22:25.756933"], ["updated_at", "2020-04-03 15:22:25.756933"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBookmark Create (0.2ms)[0m  [1m[32mINSERT INTO "bookmarks" ("name", "logo", "description", "link", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "MDN"], ["logo", "https://developer.mozilla.org/static/img/opengraph-logo.72382e605ce3.png"], ["description", "The MDN Web Docs site provides information about Open Web technologies"], ["link", "https://developer.mozilla.org/en-US/"], ["created_at", "2020-04-03 15:22:25.760130"], ["updated_at", "2020-04-03 15:22:25.760130"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/bookmarks" for ::1 at 2020-04-03 16:22:30 +0100
+Processing by BookmarksController#index as HTML
+  [1m[36mBookmark Load (0.6ms)[0m  [1m[34mSELECT "bookmarks".* FROM "bookmarks"[0m
+  ↳ app/controllers/bookmarks_controller.rb:8:in `index'
+Completed 200 OK in 9ms (Views: 7.0ms | ActiveRecord: 0.6ms | Allocations: 1604)
+
+
